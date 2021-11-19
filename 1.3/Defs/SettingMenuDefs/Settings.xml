@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<XmlExtensions.SettingsMenuDef>
+		<modId>decaf.adjustablewealthcap</modId>   
+		<label>Adjustable Wealth Cap</label>
+		<settings>
+			<li Class="XmlExtensions.Setting.SetColor">
+        <color>(255,255,0)</color>
+      </li>
+			<li Class="XmlExtensions.Setting.Text">
+        <text>Restart Required</text>
+					<anchor>Middle</anchor>
+					<font>Medium</font>
+			</li>
+      <li Class="XmlExtensions.Setting.SetColor">
+        <color>(255,255,255)</color>
+      </li>
+			<li Class="XmlExtensions.Setting.GapLine"/>
+      <li Class="XmlExtensions.Setting.Text">
+        <text>Presets:</text>
+        <anchor>Middle</anchor>
+      </li>
+			<li Class="XmlExtensions.Setting.RadioButtons">
+				<key>decaf_AWC_preset</key>
+				<defaultValue>1</defaultValue>
+				<buttons>
+          <li>
+            <label>Quartered</label>
+            <tooltip>Wealth cap is divided by four. </tooltip>
+            <value>0.25</value>
+          </li>
+          <li>
+            <label>Halved</label>
+            <tooltip>Wealth cap is divided by two.</tooltip>
+            <value>0.5</value>
+          </li>
+          <li>
+						<label>Standard</label>
+						<tooltip>Wealth cap is unchanged. This is the vanilla experience.</tooltip>
+						<value>1</value>
+					</li>
+					<li>
+						<label>Doubled</label>
+						<tooltip>Wealth cap is multiplied by two.</tooltip>	
+						<value>2</value>
+					</li>
+					<li>
+						<label>Tripled</label>
+						<tooltip>Wealth cap is multiplied by three.</tooltip>
+						<value>3</value>
+					</li>
+					<li>
+						<label>Quadrupled</label>
+						<tooltip>Wealth cap is multiplied by four.</tooltip>
+						<value>4</value>
+					</li>				
+					<li>
+						<label>Quintupled</label>
+						<tooltip>Wealth cap is multiplied by five.</tooltip>
+						<value>5</value>
+					</li>
+				</buttons>
+			</li>
+		</settings>
+    <postCloseActions>
+      <li Class="XmlExtensions.Action.ApplyOperations">
+        <apply>
+          <Operation Class="XmlExtensions.Log">
+            <warning>Adjusted Wealth Cap. Restart Required.</warning>
+          </Operation>
+        </apply>
+      </li>
+    </postCloseActions>
+	</XmlExtensions.SettingsMenuDef>
+</Defs>
