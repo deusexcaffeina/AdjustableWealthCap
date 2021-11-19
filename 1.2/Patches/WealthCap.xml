@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="XmlExtensions.UseSetting">
+		<modId>decaf.adjustablewealthcap</modId>
+		<key>decaf_AWC_preset</key>
+		<defaultValue>1</defaultValue>
+		<apply>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--Extremely Low Expectations-->
+				<value>15000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_EL</storeIn>
+				<apply> 
+					<Operation Class="PatchOperationReplace">
+						<xpath>/Defs/ExpectationDef[defName="ExtremelyLow"]/maxMapWealth</xpath>
+						<value>
+							<maxMapWealth>{expectations_EL}</maxMapWealth>
+						</value>
+					</Operation>
+				</apply>
+			</Operation>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--Very Low Expectations-->
+				<value>31000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_VL</storeIn>
+				<apply> 
+				 <Operation Class="PatchOperationReplace">
+					 <xpath>/Defs/ExpectationDef[defName="VeryLow"]/maxMapWealth</xpath>
+						<value>
+              <maxMapWealth>{expectations_VL}</maxMapWealth>
+						</value>
+					</Operation>
+				</apply>
+		</Operation>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--Low Expectations-->
+				<value>81000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_L</storeIn>
+				<apply> 
+					<Operation Class="PatchOperationReplace">
+						<xpath>/Defs/ExpectationDef[defName="Low"]/maxMapWealth</xpath>
+							<value>
+								<maxMapWealth>{expectations_L}</maxMapWealth>
+							</value>
+					</Operation>
+				</apply>
+			</Operation>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--Moderate Expectations-->
+				<value>182000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_M</storeIn>
+				<apply> 
+					<Operation Class="PatchOperationReplace">
+						<xpath>/Defs/ExpectationDef[defName="Moderate"]/maxMapWealth</xpath>
+							<value>
+								<maxMapWealth>{expectations_M}</maxMapWealth>
+							</value>
+						</Operation>
+				</apply>
+			</Operation>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--High Expectations-->
+				<value>308000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_H</storeIn>
+				<apply> 
+					<Operation Class="PatchOperationReplace">
+						<xpath>/Defs/ExpectationDef[defName="High"]/maxMapWealth</xpath>
+						<value>
+							<maxMapWealth>{expectations_H}</maxMapWealth>
+						</value>
+					</Operation>
+				</apply>
+			</Operation>
+			<Operation Class="XmlExtensions.CreateVariable">
+				<!--Sky High Expectations-->
+				<value>1000000000</value>
+				<value2>{decaf_AWC_preset}</value2>
+				<defaultValue2>1</defaultValue2>
+				<operation>*</operation>
+				<storeIn>expectations_SH</storeIn>
+				<apply> 
+					<Operation Class="PatchOperationReplace">
+						<xpath>/Defs/ExpectationDef[defName="SkyHigh"]/maxMapWealth</xpath>
+							<value>
+								<maxMapWealth>{expectations_SH}</maxMapWealth>
+							</value>
+					</Operation>
+				</apply>
+			</Operation>		
+		</apply>
+	</Operation>
+</Patch>  
+ 
