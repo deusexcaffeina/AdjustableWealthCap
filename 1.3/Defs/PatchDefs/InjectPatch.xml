@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<XmlExtensions.PatchDef Name="decaf_AWC_InjectPatch" Abstract="True">
+			<parameters>
+				<li>decaf_AWC_percent</li>
+				<li>decaf_AWC_default</li>
+		</parameters>
+			<apply>
+			 <!--Apply the patch-->
+			 <Operation Class="XmlExtensions.ApplyPatch">
+				 <patchName>decaf_AWC_PatchExpectation</patchName>
+					 <arguments>
+						 <li>{decaf_AWC_percent}</li>
+					 </arguments>
+			 </Operation>
+			 <!--Inject settings to the menu-->
+			 <Operation Class="XmlExtensions.ApplyPatch">
+				<patchName>decaf_AWC_InjectSettings</patchName>
+				 <arguments>
+					<li>{decaf_AWC_default}</li>
+				 </arguments>
+				</Operation>
+				<!--Inject actions to the game-->
+				<Operation Class="XmlExtensions.ApplyPatch">
+					<patchName>decaf_AWC_InjectActions</patchName>
+					<arguments>
+            <li>{decaf_AWC_percent}</li>
+					</arguments>
+				</Operation>
+			</apply>
+	</XmlExtensions.PatchDef>
+</Defs>

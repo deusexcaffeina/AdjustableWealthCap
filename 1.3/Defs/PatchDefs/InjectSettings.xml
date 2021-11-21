@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<XmlExtensions.PatchDef Name="decaf_AWC_InjectSettings" Abstract="True">
+			<parameters>
+				<li>decaf_AWC_default</li>
+			</parameters>
+			<apply>
+					<Operation Class="PatchOperationAdd">
+							<xpath>Defs/XmlExtensions.SettingsMenuDef[defName="decaf_AWC_settingsmenu"]/settings/li[tag="decaf_AWC_inject_settings"]/settings</xpath>
+							<value>
+								<li Class="XmlExtensions.Setting.Section">
+									<settings>
+										<li Class="XmlExtensions.Setting.Checkbox">
+											<label>Enable</label>
+											<key>decaf_AWC_enabled</key>
+											<defaultValue>true</defaultValue>
+										</li>
+										<li Class="XmlExtensions.Setting.GapLine"/>
+										<li Class="XmlExtensions.Setting.Slider">
+											<key>decaf_AWC_percent</key>
+											<defaultValue>{decaf_AWC_default}</defaultValue>
+											<label> {decaf_AWC_percent} % </label>
+											<min>1</min>
+											<max>500</max>
+											<decimals>0</decimals>
+										</li>
+										<li Class="XmlExtensions.Setting.Gap">
+											<spacing>6</spacing>
+										</li>
+									</settings>
+								</li>
+							</value>
+					</Operation>
+			</apply>
+	</XmlExtensions.PatchDef>
+</Defs>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<XmlExtensions.PatchDef Name="decaf_AWC_InjectActions" Abstract="True">
+		<parameters>
+      <li>decaf_AWC_percent</li>
+    </parameters>
+		<apply>
+			<Operation Class="PatchOperationAdd">
+				<xpath>Defs/XmlExtensions.SettingsMenuDef[defName="decaf_AWC_settingsmenu"]/postCloseActions</xpath>
+				<value>
+					<li Class="XmlExtensions.Action.ApplyOperations">
+						<apply>
+							<Operation Class="XmlExtensions.OptionalPatch">
+								<modId>decaf.adjustablewealthcap</modId>
+								<key>decaf_AWC_enabled</key>
+								<defaultValue>true</defaultValue>
+                <!--True: wealth cap may be adjusted-->
+                <caseTrue>
+									<Operation Class="XmlExtensions.AggregateValues">
+										<valueOperations>
+											<Operation Class="XmlExtensions.UseSetting">
+												<modId>decaf.adjustablewealthcap</modId>
+												<key>decaf_AWC_percent</key>
+												<defaultValue>100</defaultValue>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<value>{decaf_AWC_percent}</value>
+												<value2>100</value2>
+												<operation>/</operation>
+												<storeIn>decaf_AWC</storeIn>
+											</Operation>
+											<!--########## Maths ##########-->
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--Extremely Low Expectations-->
+												<value>15000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_EL</storeIn>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--Very Low Expectations-->
+												<value>31000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_VL</storeIn>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--Low Expectations-->
+												<value>81000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_L</storeIn>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--Moderate Expectations-->
+												<value>182000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_M</storeIn>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--High Expectations-->
+												<value>308000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_H</storeIn>
+											</Operation>
+											<Operation Class="XmlExtensions.CreateVariable">
+												<!--Sky High Expectations-->
+												<value>1000000000</value>
+												<value2>{decaf_AWC}</value2>
+												<defaultValue2>1</defaultValue2>
+												<operation>*</operation>
+												<storeIn>expectations_SH</storeIn>
+											</Operation>
+                    </valueOperations>
+										<apply>
+                      <Operation Class="XmlExtensions.Log">
+                        <warning></warning>
+                      </Operation>
+                      <Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="ExtremelyLow"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_EL}</maxMapWealth>
+												</value>
+											</Operation>
+											<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="VeryLow"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_VL}</maxMapWealth>
+												</value>
+											</Operation>
+											<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="Low"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_L}</maxMapWealth>
+												</value>
+											</Operation>
+											<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="Moderate"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_M}</maxMapWealth>
+												</value>
+											</Operation>
+											<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="High"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_H}</maxMapWealth>
+												</value>
+											</Operation>
+											<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+												<objPath>ExpectationDef/[defName="SkyHigh"]/maxMapWealth</objPath>
+												<value>
+													<maxMapWealth>{expectations_SH}</maxMapWealth>
+												</value>
+											</Operation>
+										</apply>
+									</Operation>
+								</caseTrue>
+								<!--false: True: wealth cap may not be adjusted-->
+								<caseFalse>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla Extremely Low Expectations-->
+										<objPath>ExpectationDef/[defName="ExtremelyLow"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>15000</maxMapWealth>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla Very Low Expectations-->
+										<objPath>ExpectationDef/[defName="VeryLow"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>31000</maxMapWealth>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla Low Expectations-->
+										<objPath>ExpectationDef/[defName="Low"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>81000</maxMapWealth>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla Moderate Expectations-->
+										<objPath>ExpectationDef/[defName="Moderate"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>182000</maxMapWealth>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla High Expectations-->
+										<objPath>ExpectationDef/[defName="High"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>308000</maxMapWealth>
+										</value>
+									</Operation>
+									<Operation Class="XmlExtensions.DefDatabaseOperationReplace">
+                    <!--Vanilla Sky High Expectations-->
+										<objPath>ExpectationDef/[defName="SkyHigh"]/maxMapWealth</objPath>
+										<value>
+											<maxMapWealth>1000000000</maxMapWealth>
+										</value>
+									</Operation>
+                  <Operation Class="XmlExtensions.Log">
+                    <warning>Wealth cap cannot not be adjusted; please enable 'Adjustable Wealth Cap' if you desire to.</warning>
+                  </Operation>
+								</caseFalse>
+							</Operation>
+						</apply>
+					</li>
+				</value>
+			</Operation>
+		</apply>
+	</XmlExtensions.PatchDef>
+</Defs>
